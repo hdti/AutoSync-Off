@@ -17,6 +17,6 @@ helmCharts:
         kind: daemonset
         setAsDefautIngress: true
         service:
-          type: nodePort
+          type: NodePort
           httpPort:
             nodePort: 30010
