@@ -20,3 +20,5 @@ helmCharts:
           type: NodePort
           httpPort:
             nodePort: 30010
+          httpsPort:
+            nodePort: 30410
