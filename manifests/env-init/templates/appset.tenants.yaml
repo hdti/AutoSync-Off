@@ -1,0 +1,34 @@
+{{- if .Values.tenants.enabled }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Applicationset
+metadata:
+  name: tenants-applicationset
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoUrl: {{ .Values.gitops.sot }}
+      revision: {{ .Values.tenants.targetRevision }}
+      directories:
+        - path: 'environments/{{ .values.gitops.env }}/resources/tenants/*'
+  template:
+    metadata:
+      name: '{{`{{path.basename}}`}}'
+    spec:
+      project: {{ .Values.tenants.project }}
+      source:
+        repoUrl: {{.Values.gitops.sot }}
+        targetRevision: {{ .Values.tenants.targetRevision }}
+        path: '{{`{{ path }}`}}'
+      destination:
+        namespace: '{{`{{ path.basename }}`}}'
+        server: {{ .Values.gitops.server }}
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: true
+        syncOptions:
+        - CreateNamespace=true
+{{- end -}}

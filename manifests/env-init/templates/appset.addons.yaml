@@ -1,0 +1,33 @@
+{{- if .Values.addons.enabled }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Applicationset
+metadata:
+  name: addons-applicationset
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoUrl: {{ .Values.gitops.sot }}
+      revision: {{ .Values.addons.targetRevision }}
+      directories:
+        - path: 'environments/{{ .values.gitops.env }}/resources/addons/*'
+  template:
+    metadata:
+      name: '{{`{{path.basename}}`}}'
+    spec:
+      project: {{ .Values.addons.project }}
+      source:
+        repoUrl: {{.Values.gitops.sot }}
+        targetRevision: {{ .Values.addons.targetRevision }}
+        path: '{{`{{ path }}`}}'
+      destination:
+        namespace: '{{`{{ path.basename }}`}}'
+        server: {{ .Values.gitops.server }}
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
+{{- end -}}

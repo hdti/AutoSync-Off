@@ -1,0 +1,14 @@
+gitops:
+  env: local
+  server: https://kubernetes.default.svc
+  sot: https://github.com/example/gitpos.git
+
+addons:
+  enabled: true
+  targetRevision: HEAD
+  project: default
+
+tenants:
+  enabled: true
+  targetRevision: HEAD
+  project: default
