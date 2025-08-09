@@ -11,7 +11,7 @@ spec:
       repoUrl: {{ .Values.gitops.sot }}
       revision: {{ .Values.addons.targetRevision }}
       directories:
-        - path: 'environments/{{ .values.gitops.env }}/resources/addons/*'
+        - path: 'environments/{{ .Values.gitops.env }}/resources/addons/*'
   template:
     metadata:
       name: '{{`{{path.basename}}`}}'

@@ -11,7 +11,7 @@ spec:
       repoUrl: {{ .Values.gitops.sot }}
       revision: {{ .Values.tenants.targetRevision }}
       directories:
-        - path: 'environments/{{ .values.gitops.env }}/resources/tenants/*'
+        - path: 'environments/{{ .Values.gitops.env }}/resources/tenants/*'
   template:
     metadata:
       name: '{{`{{path.basename}}`}}'
