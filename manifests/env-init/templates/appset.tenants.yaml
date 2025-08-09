@@ -8,7 +8,7 @@ metadata:
 spec:
   generators:
   - git:
-      repoUrl: {{ .Values.gitops.sot }}
+      repoURL: {{ .Values.gitops.sot }}
       revision: {{ .Values.tenants.targetRevision }}
       directories:
         - path: 'environments/{{ .Values.gitops.env }}/resources/tenants/*'
@@ -18,7 +18,7 @@ spec:
     spec:
       project: {{ .Values.tenants.project }}
       source:
-        repoUrl: {{.Values.gitops.sot }}
+        repoURL: {{.Values.gitops.sot }}
         targetRevision: {{ .Values.tenants.targetRevision }}
         path: '{{`{{ path }}`}}'
       destination:

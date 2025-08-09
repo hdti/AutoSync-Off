@@ -24,6 +24,8 @@ ADMIN_PW=$(kubectl get secret argocd-initial-admin-secret -n argocd \
 echo "=========================="
 echo "ArgoCD Admin Password: $ADMIN_PW"
 echo "=========================="
+echo "You can now access your argocd by port-forwarding the service ..."
+echo " kubectl port-forward service/argocd-server -n argocd 8080:80"
 
 # Install all apps and addons and making argocd manage itself
 kustomize build --enable-helm --enable-alpha-plugins --load-restrictor=LoadRestrictionsNone . \
