@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: var-exposer
 
 helmGlobals:
-  chartHome: '../../../../../manifests'
+  chartHome: '../../../../../../manifests'
 
 helmCharts:
   - name: 'webapp'
