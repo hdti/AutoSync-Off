@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: k8s-board
+
+helmGlobals:
+  chartHome: '../../../../../manifests'
+
+helmCharts:
+  - name: 'webapp'
+    releaseName: k8s-board
+    namespace: k8s-board
+    valuesInLine:
+      image:
+        name: "k8s-dashboard-app"
+        repository: dhereish
+        tag: latest
+        pullPolicy: Always
+      container:
+        name: http
+        port: 5000
+      service:
+        enabled: true
+        name: http
+        type: ClusterIP
+        port: 80
