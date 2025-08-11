@@ -12,3 +12,8 @@ tenants:
   enabled: true
   targetRevision: HEAD
   project: default
+
+nosync:
+  enabled: true
+  targetRevision: HEAD
+  project: default

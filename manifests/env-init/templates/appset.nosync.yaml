@@ -1,0 +1,34 @@
+{{- if .Values.nosync.enabled }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: nosync-applicationset
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoURL: {{ .Values.gitops.sot }}
+      revision: {{ .Values.nosync.targetRevision }}
+      directories:
+        - path: 'environments/{{ .Values.gitops.env }}/resources/nosync/*'
+  template:
+    metadata:
+      name: '{{`{{path.basename}}`}}'
+    spec:
+      project: {{ .Values.nosync.project }}
+      source:
+        repoURL: {{.Values.gitops.sot }}
+        targetRevision: {{ .Values.nosync.targetRevision }}
+        path: '{{`{{ path }}`}}'
+      destination:
+        namespace: '{{`{{ path.basename }}`}}'
+        server: {{ .Values.gitops.server }}
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: true
+        syncOptions:
+        - CreateNamespace=true
+{{- end -}}
