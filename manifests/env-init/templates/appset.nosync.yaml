@@ -3,7 +3,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: addons-applicationset
+  name: test-applicationset
   namespace: argocd
 spec:
   generators:
@@ -11,7 +11,7 @@ spec:
       repoURL: {{ .Values.gitops.sot }}
       revision: {{ .Values.nosync.targetRevision }}
       directories:
-        - path: 'environments/{{ .Values.gitops.env }}/resources/nosync/*'
+        - path: 'environments/{{ .Values.gitops.env }}/resources/nn-test/*'
   template:
     metadata:
       name: '{{`{{path.basename}}`}}'
@@ -29,7 +29,7 @@ spec:
       ignoreDifferences:
       - group: argoproj.io
         kind: Application
-        name: var-exposer
+        name: var-exposer-test
         namespace: argocd
         jsonPointers:
           - /spec/syncPolicy
