@@ -24,4 +24,6 @@ helmCharts:
         name: http
         type: ClusterIP
         port: 8080
-    
+
+resources:
+  - application.yaml
