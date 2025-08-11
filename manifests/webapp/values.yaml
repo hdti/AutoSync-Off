@@ -1,0 +1,44 @@
+replicas: 1
+
+image:
+  name: ""
+  repository: refontewebgri.azurecr.io
+  tag: latest
+  pullPolicy: Always
+container:
+  name: http
+  port: 80
+ 
+serviceAccount:
+  create: true
+  annotations: {}
+
+service:
+  enabled: true
+  name: http
+  type: ClusterIP
+  externalName: null
+  port: 80
+# selector: {}
+# annotations: {}
+volumes:
+  enabled: false
+  name: ""
+  cmName: ""
+  mountPath: ""
+  mountSubPath: ""
+
+configuration: {} 
+
+imagePullSecrets:
+  - name: "regcred"
+
+nodeSelector: {}
+tolerations: {}
+
+resources: {}
+podSecurityContext: {}
+securityContext: {}
+strategy: {}
+
+

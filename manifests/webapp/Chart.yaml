@@ -1,0 +1,4 @@
+apiVersion: v2
+description: Utility-first Helm Chart. One Chart to rule them all.
+name: webapp
+version: 1.0.0
