@@ -24,13 +24,6 @@ spec:
       destination:
         namespace: '{{`{{ path.basename }}`}}'
         server: {{ .Values.gitops.server }}
-      syncPolicy:
-        automated: 
-          # prune: true
-          # selfHeal: true
-          allowEmpty: true
-        syncOptions:
-        - CreateNamespace=true
       ignoreDifferences:
         - group: argoproj.io
           kind: Application
