@@ -12,7 +12,7 @@ helmCharts:
     namespace: var-exposer
     valuesInLine:
       image:
-        name: "var-exposer"
+        name: "py-show-vars"
         repository: hereishd
         tag: dev
         pullPolicy: Always
