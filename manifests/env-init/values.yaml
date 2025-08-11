@@ -17,3 +17,7 @@ nosync:
   enabled: false
   targetRevision: HEAD
   project: default
+
+application:
+  nosync:
+    enabled: false

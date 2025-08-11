@@ -11,7 +11,7 @@ spec:
       repoURL: {{ .Values.gitops.sot }}
       revision: {{ .Values.nosync.targetRevision }}
       directories:
-        - path: 'environments/{{ .Values.gitops.env }}/resources/nosync/*'
+        - path: 'environments/{{ .Values.gitops.env }}/resources/nosync/apps/*'
   template:
     metadata:
       name: '{{`{{path.basename}}`}}'
@@ -29,8 +29,9 @@ spec:
           kind: Application
           name: '{{`{{ path.basename }}`}}'
           namespace: '{{`{{ path.basename }}`}}'
-          jsonPointers:
+          ignoreDifferences:
             - /spec/syncPolicy
-            - /spec/syncPolicy/automated
-            - /spec/syncPolicy/syncOptions
+            - /spec/status
+            - /spec/source/targetRevision
 {{- end -}}
+

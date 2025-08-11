@@ -12,15 +12,12 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: var-exposer
-  syncPolicy:
-    syncOptions:
-      - CreateNamespace=true
   ignoreDifferences:
   - group: argoproj.io
     kind: Application
-    name: '{{`{{ path.basename }}`}}'
-    namespace: '{{`{{ path.basename }}`}}'
+    name: var-exposer
+    namespace: argocd
     jsonPointers:
       - /spec/syncPolicy
-      - /spec/status
-      - /spec/source/targetRevision
+      # - /spec/status
+      # - /spec/source/targetRevision
