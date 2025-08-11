@@ -13,9 +13,14 @@ spec:
     server: https://kubernetes.default.svc
     namespace: var-exposer
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-      allowEmpty: true
     syncOptions:
       - CreateNamespace=true
+  ignoreDifferences:
+  - group: argoproj.io
+    kind: Application
+    name: '{{`{{ path.basename }}`}}'
+    namespace: '{{`{{ path.basename }}`}}'
+    jsonPointers:
+      - /spec/syncPolicy
+      - /spec/status
+      - /spec/source/targetRevision
