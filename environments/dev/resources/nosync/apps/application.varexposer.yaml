@@ -12,6 +12,8 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: var-exposer
+  syncPolicy:
+    automated: {}
   ignoreDifferences:
   - group: argoproj.io
     kind: Application
@@ -19,5 +21,6 @@ spec:
     namespace: argocd
     jsonPointers:
       - /spec/syncPolicy
+      - /spec/syncPolicy/automated
       # - /spec/status
       # - /spec/source/targetRevision
