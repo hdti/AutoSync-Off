@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: var-exposer-test
+
+helmGlobals:
+  chartHome: '../../../../../manifests'
+
+helmCharts:
+  - name: 'webapp'
+    releaseName: var-exposer-test
+    namespace: var-exposer-test
+    valuesInLine:
+      image:
+        name: "py-show-vars"
+        repository: hereishd
+        tag: dev
+        pullPolicy: Always
+      container:
+        name: http
+        port: 8080
+      service:
+        enabled: true
+        name: http
+        type: ClusterIP
+        port: 8080

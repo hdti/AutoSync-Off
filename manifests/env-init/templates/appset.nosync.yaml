@@ -3,7 +3,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: nosync-applicationset
+  name: addons-applicationset
   namespace: argocd
 spec:
   generators:
@@ -11,10 +11,12 @@ spec:
       repoURL: {{ .Values.gitops.sot }}
       revision: {{ .Values.nosync.targetRevision }}
       directories:
-        - path: 'environments/{{ .Values.gitops.env }}/resources/nosync/apps/*'
+        - path: 'environments/{{ .Values.gitops.env }}/resources/nosync/*'
   template:
     metadata:
       name: '{{`{{path.basename}}`}}'
+      annotations:
+        argocd.argoproj.io/sync-options: SkipReconcile=true
     spec:
       project: {{ .Values.nosync.project }}
       source:
@@ -25,11 +27,10 @@ spec:
         namespace: '{{`{{ path.basename }}`}}'
         server: {{ .Values.gitops.server }}
       ignoreDifferences:
-        - group: argoproj.io
-          kind: Application
-          name: '{{`{{ path.basename }}`}}'
-          namespace: '{{`{{ path.basename }}`}}'
-          jsonPointers:
-            - /spec/syncPolicy
+      - group: argoproj.io
+        kind: Application
+        name: var-exposer
+        namespace: argocd
+        jsonPointers:
+          - /spec/syncPolicy
 {{- end -}}
-
