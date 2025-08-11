@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/hdti/AutoSync-Off.git
-    path: environments/dev/resources/nosync/var-exposer
+    path: environments/dev/resources/nosync/apps/var-exposer
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
